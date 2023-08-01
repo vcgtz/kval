@@ -31,7 +31,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:     "local-store",
 	Version: "0.0.1",
-	Short:   "CLI tool to store text values locally",
+	Short:   "CLI tool to store text values locally.",
 	Long: `
 local-store is a tool that will help you to store and retrieve text values
 by using the terminal.
