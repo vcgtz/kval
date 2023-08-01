@@ -7,6 +7,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/vcgtz/local-store/internal/fileutil"
 )
 
 // setCmd represents the set command
@@ -17,9 +18,11 @@ var setCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		key := args[0]
 		value := args[1]
+		homeDir, _ := fileutil.GetHomeDir()
 
 		fmt.Println(key)
 		fmt.Println(value)
+		fmt.Println(homeDir)
 	},
 }
 
