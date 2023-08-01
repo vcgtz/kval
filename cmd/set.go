@@ -11,6 +11,8 @@ import (
 	"github.com/vcgtz/local-store/internal/localstoreutil"
 )
 
+var force bool
+
 // setCmd represents the set command
 var setCmd = &cobra.Command{
 	Use:   "set [KEY] [VALUE]",
@@ -20,7 +22,7 @@ var setCmd = &cobra.Command{
 		key := args[0]
 		value := args[1]
 
-		successMsg, err := localstoreutil.StoreKey(key, value, false)
+		successMsg, err := localstoreutil.StoreKey(key, value, force)
 
 		if err != nil {
 			fmt.Println("An error occurs: ", err)
@@ -43,4 +45,5 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// setCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	setCmd.Flags().BoolVarP(&force, "force", "f", false, "force to overwrite an existing value.")
 }
