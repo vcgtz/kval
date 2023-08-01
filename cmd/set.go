@@ -5,9 +5,10 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/vcgtz/local-store/internal/fileutil"
+	"github.com/vcgtz/local-store/internal/localstoreutil"
 )
 
 // setCmd represents the set command
@@ -19,9 +20,14 @@ var setCmd = &cobra.Command{
 		key := args[0]
 		value := args[1]
 
-		fmt.Println(key)
-		fmt.Println(value)
-		fileutil.Init()
+		successMsg, err := localstoreutil.StoreKey(key, value, false)
+
+		if err != nil {
+			fmt.Println("An error occurs: ", err)
+			os.Exit(1)
+		}
+
+		fmt.Println(successMsg)
 	},
 }
 
