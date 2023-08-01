@@ -18,11 +18,10 @@ var setCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		key := args[0]
 		value := args[1]
-		homeDir, _ := fileutil.GetHomeDir()
 
 		fmt.Println(key)
 		fmt.Println(value)
-		fmt.Println(homeDir)
+		fileutil.Init()
 	},
 }
 
