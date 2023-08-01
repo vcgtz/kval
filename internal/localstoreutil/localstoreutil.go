@@ -69,6 +69,11 @@ func StoreKey(key string, value string, force bool) (string, error) {
 		return "", errors.New("error parsing the existing dataa")
 	}
 
+	_, ok := data[key]
+	if ok && !force {
+		return fmt.Sprintf("The key %s already exists. Use --force to overwrite it.", key), nil
+	}
+
 	data[key] = value
 
 	newData, err := json.MarshalIndent(data, "", "	")
