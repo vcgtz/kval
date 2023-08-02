@@ -54,55 +54,70 @@ func createFileIfNotExist() {
 	}
 }
 
-func StoreValue(key string, value string, force bool) (string, error) {
-	createFileIfNotExist()
-
+func getContent() (map[string]interface{}, error) {
 	filePath, _ := getFilePath()
 	data := make(map[string]interface{})
 
 	fileContent, err := os.ReadFile(filePath)
 	if err != nil {
-		return "", errors.New("error reading the existing data")
+		return nil, errors.New("error reading the existing data")
 	}
 
 	if err := json.Unmarshal(fileContent, &data); err != nil {
-		return "", errors.New("error parsing the existing data")
+		return nil, errors.New("error parsing the existing data")
 	}
 
+	return data, nil
+}
+
+func saveContent(data map[string]interface{}) error {
+	filePath, _ := getFilePath()
+	newData, err := json.MarshalIndent(data, "", "	")
+	if err != nil {
+		return errors.New("error reading the existing data")
+	}
+
+	if err := os.WriteFile(filePath, newData, 0644); err != nil {
+		return errors.New("error writing the new data")
+	}
+
+	return nil
+}
+
+func existKey(data map[string]interface{}, key string) bool {
 	_, ok := data[key]
-	if ok && !force {
+
+	return ok
+}
+
+func StoreValue(key string, value string, force bool) (string, error) {
+	createFileIfNotExist()
+
+	data, err := getContent()
+	if err != nil {
+		return "", err
+	}
+
+	if existKey(data, key) && !force {
 		return fmt.Sprintf("The key %s already exists. Use --force to overwrite it.", key), nil
 	}
 
 	data[key] = value
 
-	newData, err := json.MarshalIndent(data, "", "	")
-	if err != nil {
-		return "", errors.New("error reading the existing data")
-	}
-
-	if err := os.WriteFile(filePath, newData, 0644); err != nil {
-		return "", errors.New("error writing the new data")
+	if err := saveContent(data); err != nil {
+		return "", err
 	}
 
 	return fmt.Sprintf("The key '%s' was store successfuly", key), nil
 }
 
 func GetValue(key string) (string, error) {
-	filePath, _ := getFilePath()
-	data := make(map[string]interface{})
-
-	fileContent, err := os.ReadFile(filePath)
+	data, err := getContent()
 	if err != nil {
-		return "", errors.New("error reading the existing data")
+		return "", err
 	}
 
-	if err := json.Unmarshal(fileContent, &data); err != nil {
-		return "", errors.New("error parsing the existing data")
-	}
-
-	_, ok := data[key]
-	if ok {
+	if existKey(data, key) {
 		return fmt.Sprintf("%v", data[key]), nil
 	}
 
@@ -111,16 +126,10 @@ func GetValue(key string) (string, error) {
 
 func GetKeys() ([]string, error) {
 	var keys []string
-	filePath, _ := getFilePath()
-	data := make(map[string]interface{})
 
-	fileContent, err := os.ReadFile(filePath)
+	data, err := getContent()
 	if err != nil {
-		return keys, errors.New("error reading the existing data")
-	}
-
-	if err := json.Unmarshal(fileContent, &data); err != nil {
-		return keys, errors.New("error parsing the existing data")
+		return keys, err
 	}
 
 	if len(data) > 0 {
