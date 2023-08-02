@@ -108,3 +108,28 @@ func GetValue(key string) (string, error) {
 
 	return "", nil
 }
+
+func GetKeys() ([]string, error) {
+	var keys []string
+	filePath, _ := getFilePath()
+	data := make(map[string]interface{})
+
+	fileContent, err := os.ReadFile(filePath)
+	if err != nil {
+		return keys, errors.New("error reading the existing data")
+	}
+
+	if err := json.Unmarshal(fileContent, &data); err != nil {
+		return keys, errors.New("error parsing the existing data")
+	}
+
+	if len(data) > 0 {
+		for key := range data {
+			keys = append(keys, key)
+		}
+
+		return keys, nil
+	}
+
+	return keys, nil
+}
