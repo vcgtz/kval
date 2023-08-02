@@ -124,6 +124,25 @@ func GetValue(key string) (string, error) {
 	return "", nil
 }
 
+func DeleteValue(key string) (string, error) {
+	data, err := getContent()
+	if err != nil {
+		return "", err
+	}
+
+	if !existKey(data, key) {
+		return fmt.Sprintf("The key '%s' does not exist.", key), nil
+	}
+
+	delete(data, key)
+
+	if err := saveContent(data); err != nil {
+		return "", err
+	}
+
+	return fmt.Sprintf("The key '%s' was deleted.", key), nil
+}
+
 func GetKeys() ([]string, error) {
 	var keys []string
 
