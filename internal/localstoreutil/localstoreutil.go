@@ -54,7 +54,7 @@ func createFileIfNotExist() {
 	}
 }
 
-func StoreKey(key string, value string, force bool) (string, error) {
+func StoreValue(key string, value string, force bool) (string, error) {
 	createFileIfNotExist()
 
 	filePath, _ := getFilePath()
@@ -66,7 +66,7 @@ func StoreKey(key string, value string, force bool) (string, error) {
 	}
 
 	if err := json.Unmarshal(fileContent, &data); err != nil {
-		return "", errors.New("error parsing the existing dataa")
+		return "", errors.New("error parsing the existing data")
 	}
 
 	_, ok := data[key]
@@ -86,4 +86,25 @@ func StoreKey(key string, value string, force bool) (string, error) {
 	}
 
 	return fmt.Sprintf("The key '%s' was store successfuly", key), nil
+}
+
+func GetValue(key string) (string, error) {
+	filePath, _ := getFilePath()
+	data := make(map[string]interface{})
+
+	fileContent, err := os.ReadFile(filePath)
+	if err != nil {
+		return "", errors.New("error reading the existing data")
+	}
+
+	if err := json.Unmarshal(fileContent, &data); err != nil {
+		return "", errors.New("error parsing the existing data")
+	}
+
+	_, ok := data[key]
+	if ok {
+		return fmt.Sprintf("%v", data[key]), nil
+	}
+
+	return "", nil
 }

@@ -6,6 +6,7 @@ package cmd
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"github.com/vcgtz/local-store/internal/localstoreutil"
 )
 
 // getCmd represents the get command
@@ -15,8 +16,9 @@ var getCmd = &cobra.Command{
 	Args:  cobra.MatchAll(cobra.ExactArgs(1), cobra.OnlyValidArgs),
 	Run: func(cmd *cobra.Command, args []string) {
 		key := args[0]
+		value, _ := localstoreutil.GetValue(key)
 
-		fmt.Println(key)
+		fmt.Println("\n", value)
 	},
 }
 

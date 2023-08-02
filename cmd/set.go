@@ -22,14 +22,14 @@ var setCmd = &cobra.Command{
 		key := args[0]
 		value := args[1]
 
-		successMsg, err := localstoreutil.StoreKey(key, value, force)
+		successMsg, err := localstoreutil.StoreValue(key, value, force)
 
 		if err != nil {
 			fmt.Println("An error occurs: ", err)
 			os.Exit(1)
 		}
 
-		fmt.Println(successMsg)
+		fmt.Println("\n", successMsg)
 	},
 }
 
