@@ -15,8 +15,8 @@ var force bool
 
 // setCmd represents the set command
 var setCmd = &cobra.Command{
-	Use:   "set [KEY] [VALUE]",
-	Short: "Store a single text value.",
+	Use:   "set [KEY] [VALUE] [FLAGS]",
+	Short: "Store a single text value",
 	Args:  cobra.MatchAll(cobra.ExactArgs(2), cobra.OnlyValidArgs),
 	Run: func(cmd *cobra.Command, args []string) {
 		key := args[0]

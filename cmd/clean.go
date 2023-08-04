@@ -13,7 +13,7 @@ import (
 // cleanCmd represents the clean command
 var cleanCmd = &cobra.Command{
 	Use:   "clean",
-	Short: "Delete all the exising keys.",
+	Short: "Delete all the exising keys",
 	Run: func(cmd *cobra.Command, args []string) {
 		successMsg, err := localstoreutil.Clean()
 

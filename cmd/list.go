@@ -12,7 +12,7 @@ import (
 // listCmd represents the list command
 var listCmd = &cobra.Command{
 	Use:   "list",
-	Short: "List all the stores keys.",
+	Short: "List all the stores keys",
 	Run: func(cmd *cobra.Command, args []string) {
 		keys, _ := localstoreutil.GetKeys()
 

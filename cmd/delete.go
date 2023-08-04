@@ -13,7 +13,7 @@ import (
 // deleteCmd represents the delete command
 var deleteCmd = &cobra.Command{
 	Use:   "delete [KEY]",
-	Short: "Delete an existing key.",
+	Short: "Delete an existing key",
 	Args:  cobra.MatchAll(cobra.ExactArgs(1), cobra.OnlyValidArgs),
 	Run: func(cmd *cobra.Command, args []string) {
 		key := args[0]
