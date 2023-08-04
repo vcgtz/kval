@@ -163,7 +163,7 @@ func GetKeys() ([]string, error) {
 }
 
 func Clean() (string, error) {
-	var data map[string]interface{}
+	data := map[string]interface{}{}
 
 	if err := saveContent(data); err != nil {
 		return "", err

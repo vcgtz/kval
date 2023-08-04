@@ -7,7 +7,11 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/vcgtz/local-store/internal/localstoreutil"
+	"golang.design/x/clipboard"
+	"os"
 )
+
+var copy bool
 
 // getCmd represents the get command
 var getCmd = &cobra.Command{
@@ -19,6 +23,17 @@ var getCmd = &cobra.Command{
 		value, _ := localstoreutil.GetValue(key)
 
 		fmt.Println("\n", value)
+
+		if copy {
+			err := clipboard.Init()
+
+			if err != nil {
+				fmt.Println("An error occurs: ", err)
+				os.Exit(1)
+			}
+
+			clipboard.Write(clipboard.FmtText, []byte(value))
+		}
 	},
 }
 
@@ -34,4 +49,5 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// getCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	getCmd.Flags().BoolVarP(&copy, "copy", "c", false, "copy the value to the clipboard.")
 }
