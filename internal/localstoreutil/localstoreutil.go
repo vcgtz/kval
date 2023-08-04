@@ -161,3 +161,13 @@ func GetKeys() ([]string, error) {
 
 	return keys, nil
 }
+
+func Clean() (string, error) {
+	var data map[string]interface{}
+
+	if err := saveContent(data); err != nil {
+		return "", err
+	}
+
+	return "All the keys were cleaned.", nil
+}
