@@ -18,7 +18,8 @@ var listCmd = &cobra.Command{
 		keys, _ := localstoreutil.GetKeys()
 
 		if len(keys) == 0 {
-			fmt.Println("\nNo stored keys.")
+			msgFormat := color.New(color.FgRed, color.Bold)
+			_, _ = msgFormat.Println("\nThere are no stored keys.")
 			return
 		}
 
