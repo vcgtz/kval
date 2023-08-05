@@ -5,6 +5,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"github.com/vcgtz/local-store/internal/localstoreutil"
 	"golang.design/x/clipboard"
@@ -22,7 +23,14 @@ var getCmd = &cobra.Command{
 		key := args[0]
 		value, _ := localstoreutil.GetValue(key)
 
-		fmt.Println("\n", value)
+		fmt.Print("\n")
+		titleFormat := color.New(color.Bold)
+
+		_, _ = titleFormat.Printf("Key: ")
+		fmt.Println(key)
+
+		_, _ = titleFormat.Printf("Value: ")
+		fmt.Println(value)
 
 		if copy {
 			err := clipboard.Init()

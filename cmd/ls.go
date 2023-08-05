@@ -24,21 +24,15 @@ var listCmd = &cobra.Command{
 
 		fmt.Print("\n")
 		titleFormat := color.New(color.Bold)
-
-		_, err := titleFormat.Println("Keys")
-		if err != nil {
-			fmt.Println("Keys")
-		}
+		_, _ = titleFormat.Println("Keys")
 
 		for _, key := range keys {
 			fmt.Printf("-> ")
 			keyFormat := color.New(color.FgYellow)
-
-			_, err := keyFormat.Println(key)
-			if err != nil {
-				fmt.Println(key)
-			}
+			_, _ = keyFormat.Println(key)
 		}
+
+		fmt.Print("\n")
 	},
 }
 
