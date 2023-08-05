@@ -28,7 +28,7 @@ var listCmd = &cobra.Command{
 
 		for _, key := range keys {
 			fmt.Printf("-> ")
-			keyFormat := color.New(color.FgYellow)
+			keyFormat := color.New(color.FgBlue)
 			_, _ = keyFormat.Println(key)
 		}
 

@@ -5,6 +5,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/fatih/color"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -22,14 +23,36 @@ var setCmd = &cobra.Command{
 		key := args[0]
 		value := args[1]
 
-		successMsg, err := localstoreutil.StoreValue(key, value, force)
+		status, err := localstoreutil.StoreValue(key, value, force)
 
 		if err != nil {
 			fmt.Println("An error occurs: ", err)
 			os.Exit(1)
 		}
 
-		fmt.Println("\n", successMsg)
+		fmt.Print("\n")
+		if status == "duplicated" {
+			fmt.Print("Key")
+
+			keyFormat := color.New(color.FgBlue, color.Bold)
+			_, _ = keyFormat.Printf(" %s ", key)
+
+			fmt.Print("already exists. Use")
+
+			flagFormat := color.New(color.FgYellow, color.Bold)
+			_, _ = flagFormat.Print(" --force ")
+
+			fmt.Print("to overwrite it.\n")
+		}
+
+		if status == "success" {
+			fmt.Print("Key")
+
+			keyFormat := color.New(color.FgBlue, color.Bold)
+			_, _ = keyFormat.Printf(" %s ", key)
+
+			fmt.Print("was store successfully.\n")
+		}
 	},
 }
 

@@ -99,7 +99,7 @@ func StoreValue(key string, value string, force bool) (string, error) {
 	}
 
 	if existKey(data, key) && !force {
-		return fmt.Sprintf("The key %s already exists. Use --force to overwrite it.", key), nil
+		return "duplicated", nil
 	}
 
 	data[key] = value
@@ -108,7 +108,7 @@ func StoreValue(key string, value string, force bool) (string, error) {
 		return "", err
 	}
 
-	return fmt.Sprintf("The key '%s' was store successfuly", key), nil
+	return "success", nil
 }
 
 func GetValue(key string) (string, error) {
