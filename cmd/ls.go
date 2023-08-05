@@ -5,13 +5,14 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"github.com/vcgtz/local-store/internal/localstoreutil"
 )
 
 // listCmd represents the list command
 var listCmd = &cobra.Command{
-	Use:   "list",
+	Use:   "ls",
 	Short: "List all the stores keys",
 	Run: func(cmd *cobra.Command, args []string) {
 		keys, _ := localstoreutil.GetKeys()
@@ -22,8 +23,21 @@ var listCmd = &cobra.Command{
 		}
 
 		fmt.Print("\n")
-		for index, key := range keys {
-			fmt.Printf("%d: %s\n", index+1, key)
+		titleFormat := color.New(color.Bold)
+
+		_, err := titleFormat.Println("Keys")
+		if err != nil {
+			fmt.Println("Keys")
+		}
+
+		for _, key := range keys {
+			fmt.Printf("-> ")
+			keyFormat := color.New(color.FgYellow)
+
+			_, err := keyFormat.Println(key)
+			if err != nil {
+				fmt.Println(key)
+			}
 		}
 	},
 }
