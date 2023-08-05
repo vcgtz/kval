@@ -131,7 +131,7 @@ func DeleteValue(key string) (string, error) {
 	}
 
 	if !existKey(data, key) {
-		return fmt.Sprintf("The key '%s' does not exist.", key), nil
+		return "no_exist", nil
 	}
 
 	delete(data, key)
@@ -140,7 +140,7 @@ func DeleteValue(key string) (string, error) {
 		return "", err
 	}
 
-	return fmt.Sprintf("The key '%s' was deleted.", key), nil
+	return "success", nil
 }
 
 func GetKeys() ([]string, error) {
