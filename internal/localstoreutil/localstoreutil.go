@@ -162,12 +162,12 @@ func GetKeys() ([]string, error) {
 	return keys, nil
 }
 
-func Clean() (string, error) {
+func Clean() (bool, error) {
 	data := map[string]interface{}{}
 
 	if err := saveContent(data); err != nil {
-		return "", err
+		return false, err
 	}
 
-	return "All the keys were cleaned.", nil
+	return true, nil
 }

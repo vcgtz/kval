@@ -5,6 +5,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"github.com/vcgtz/local-store/internal/localstoreutil"
 	"os"
@@ -15,14 +16,15 @@ var cleanCmd = &cobra.Command{
 	Use:   "clean",
 	Short: "Delete all the exising keys",
 	Run: func(cmd *cobra.Command, args []string) {
-		successMsg, err := localstoreutil.Clean()
+		_, err := localstoreutil.Clean()
 
 		if err != nil {
 			fmt.Println("An error occurs: ", err)
 			os.Exit(1)
 		}
 
-		fmt.Println("\n", successMsg)
+		msgFormat := color.New(color.FgRed, color.Bold)
+		_, _ = msgFormat.Println("\nAll the keys were removed successfully.")
 	},
 }
 
