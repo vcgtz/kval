@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 )
 
-const folderName string = ".cli-local-store"
-const fileName string = "local-store.json"
+const folderName string = ".cli-kval"
+const fileName string = "kval.json"
 
 func fileExists(filePath string) bool {
 	if _, err := os.Stat(filePath); os.IsNotExist(err) {

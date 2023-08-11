@@ -29,11 +29,11 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:     "local-store",
+	Use:     "kval",
 	Version: "0.0.1",
 	Short:   "CLI tool to store text values locally.",
 	Long: `
-local-store is a tool that will help you to store and retrieve text values
+kval is a tool that will help you to store and retrieve text values
 by using the terminal.
 
 You can store URLs, emails, phone numbers, tokens, passwords, or any other value
@@ -60,7 +60,7 @@ func init() {
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
 
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.local-store.yaml)")
+	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.kval.yaml)")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.

@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
-	"github.com/vcgtz/local-store/internal/localstoreutil"
+	"github.com/vcgtz/kval/internal/localstoreutil"
 	"golang.design/x/clipboard"
 	"os"
 )

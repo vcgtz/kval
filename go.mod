@@ -1,4 +1,4 @@
-module github.com/vcgtz/local-store
+module github.com/vcgtz/kval
 
 go 1.20
 

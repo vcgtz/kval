@@ -6,7 +6,7 @@ package cmd
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"github.com/vcgtz/local-store/internal/localstoreutil"
+	"github.com/vcgtz/kval/internal/localstoreutil"
 	"os"
 )
 

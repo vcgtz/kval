@@ -21,7 +21,7 @@ THE SOFTWARE.
 */
 package main
 
-import "github.com/vcgtz/local-store/cmd"
+import "github.com/vcgtz/kval/cmd"
 
 func main() {
 	cmd.Execute()
