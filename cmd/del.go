@@ -26,23 +26,22 @@ var deleteCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		fmt.Print("\n")
 		if status == "no_exist" {
-			fmt.Print("Key")
+			fmt.Print("The key")
 
-			keyFormat := color.New(color.FgBlue, color.Bold)
+			keyFormat := color.New(color.FgYellow, color.Bold)
 			_, _ = keyFormat.Printf(" %s ", key)
 
-			fmt.Print("does not exist.\n")
+			fmt.Println("does not exist")
 		}
 
 		if status == "success" {
-			fmt.Print("Key")
+			fmt.Print("The key")
 
-			keyFormat := color.New(color.FgBlue, color.Bold)
+			keyFormat := color.New(color.FgYellow, color.Bold)
 			_, _ = keyFormat.Printf(" %s ", key)
 
-			fmt.Print("was deleted successfully.\n")
+			fmt.Println("was deleted")
 		}
 	},
 }

@@ -5,7 +5,6 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"github.com/vcgtz/local-store/internal/localstoreutil"
 	"os"
@@ -23,8 +22,7 @@ var cleanCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		msgFormat := color.New(color.FgRed, color.Bold)
-		_, _ = msgFormat.Println("\nAll the keys were removed successfully.")
+		fmt.Println("All the keys were removed")
 	},
 }
 

@@ -18,22 +18,16 @@ var listCmd = &cobra.Command{
 		keys, _ := localstoreutil.GetKeys()
 
 		if len(keys) == 0 {
-			msgFormat := color.New(color.FgRed, color.Bold)
-			_, _ = msgFormat.Println("\nThere are no stored keys.")
+			msgFormat := color.New(color.FgYellow)
+			_, _ = msgFormat.Println("There are no stored keys")
 			return
 		}
 
-		fmt.Print("\n")
-		titleFormat := color.New(color.Bold)
-		_, _ = titleFormat.Println("Keys")
-
 		for _, key := range keys {
-			fmt.Printf("-> ")
-			keyFormat := color.New(color.FgBlue)
+			fmt.Printf("• ")
+			keyFormat := color.New(color.FgYellow)
 			_, _ = keyFormat.Println(key)
 		}
-
-		fmt.Print("\n")
 	},
 }
 

@@ -30,28 +30,27 @@ var setCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		fmt.Print("\n")
 		if status == "duplicated" {
-			fmt.Print("Key")
+			fmt.Print("The key")
 
-			keyFormat := color.New(color.FgBlue, color.Bold)
+			keyFormat := color.New(color.FgYellow, color.Bold)
 			_, _ = keyFormat.Printf(" %s ", key)
 
 			fmt.Print("already exists. Use")
 
-			flagFormat := color.New(color.FgYellow, color.Bold)
+			flagFormat := color.New(color.FgRed, color.Bold)
 			_, _ = flagFormat.Print(" --force ")
 
-			fmt.Print("to overwrite it.\n")
+			fmt.Println("to overwrite it")
 		}
 
 		if status == "success" {
-			fmt.Print("Key")
+			fmt.Print("The key")
 
-			keyFormat := color.New(color.FgBlue, color.Bold)
+			keyFormat := color.New(color.FgYellow, color.Bold)
 			_, _ = keyFormat.Printf(" %s ", key)
 
-			fmt.Print("was store successfully.\n")
+			fmt.Println("was store")
 		}
 	},
 }

@@ -12,7 +12,7 @@ import (
 	"os"
 )
 
-var copy bool
+var copyValue bool
 
 // getCmd represents the get command
 var getCmd = &cobra.Command{
@@ -23,16 +23,10 @@ var getCmd = &cobra.Command{
 		key := args[0]
 		value, _ := localstoreutil.GetValue(key)
 
-		fmt.Print("\n")
-		titleFormat := color.New(color.Bold)
+		titleFormat := color.New(color.FgMagenta)
+		_, _ = titleFormat.Println(value)
 
-		_, _ = titleFormat.Printf("Key: ")
-		fmt.Println(key)
-
-		_, _ = titleFormat.Printf("Value: ")
-		fmt.Println(value)
-
-		if copy {
+		if copyValue {
 			err := clipboard.Init()
 
 			if err != nil {
@@ -57,5 +51,5 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// getCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	getCmd.Flags().BoolVarP(&copy, "copy", "c", false, "copy the value to the clipboard.")
+	getCmd.Flags().BoolVarP(&copyValue, "copy", "c", false, "copy the value to the clipboard.")
 }
