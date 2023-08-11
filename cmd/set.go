@@ -50,7 +50,7 @@ var setCmd = &cobra.Command{
 			keyFormat := color.New(color.FgYellow, color.Bold)
 			_, _ = keyFormat.Printf(" %s ", key)
 
-			fmt.Println("was store")
+			fmt.Println("was stored")
 		}
 	},
 }
